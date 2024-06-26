@@ -31,7 +31,7 @@
             this.label_insertId = new System.Windows.Forms.Label();
             this.textBox_id = new System.Windows.Forms.TextBox();
             this.button_submit = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBox_password = new System.Windows.Forms.TextBox();
             this.label_insertPassword = new System.Windows.Forms.Label();
             this.button_change_password = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -39,7 +39,7 @@
             // label_insertId
             // 
             this.label_insertId.AutoSize = true;
-            this.label_insertId.Location = new System.Drawing.Point(151, 41);
+            this.label_insertId.Location = new System.Drawing.Point(152, 33);
             this.label_insertId.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label_insertId.Name = "label_insertId";
             this.label_insertId.Size = new System.Drawing.Size(142, 31);
@@ -48,7 +48,7 @@
             // 
             // textBox_id
             // 
-            this.textBox_id.Location = new System.Drawing.Point(98, 102);
+            this.textBox_id.Location = new System.Drawing.Point(98, 70);
             this.textBox_id.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.textBox_id.Name = "textBox_id";
             this.textBox_id.Size = new System.Drawing.Size(248, 38);
@@ -64,19 +64,20 @@
             this.button_submit.TabIndex = 2;
             this.button_submit.Text = "כניסה";
             this.button_submit.UseVisualStyleBackColor = true;
+            this.button_submit.Click += new System.EventHandler(this.button_submit_Click);
             // 
-            // textBox1
+            // textBox_password
             // 
-            this.textBox1.Location = new System.Drawing.Point(98, 219);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(6);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(248, 38);
-            this.textBox1.TabIndex = 4;
+            this.textBox_password.Location = new System.Drawing.Point(98, 167);
+            this.textBox_password.Margin = new System.Windows.Forms.Padding(6);
+            this.textBox_password.Name = "textBox_password";
+            this.textBox_password.Size = new System.Drawing.Size(248, 38);
+            this.textBox_password.TabIndex = 4;
             // 
             // label_insertPassword
             // 
             this.label_insertPassword.AutoSize = true;
-            this.label_insertPassword.Location = new System.Drawing.Point(177, 182);
+            this.label_insertPassword.Location = new System.Drawing.Point(177, 130);
             this.label_insertPassword.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label_insertPassword.Name = "label_insertPassword";
             this.label_insertPassword.Size = new System.Drawing.Size(87, 31);
@@ -99,7 +100,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(437, 454);
             this.Controls.Add(this.button_change_password);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.textBox_password);
             this.Controls.Add(this.label_insertPassword);
             this.Controls.Add(this.button_submit);
             this.Controls.Add(this.textBox_id);
@@ -120,7 +121,7 @@
         private System.Windows.Forms.Label label_insertId;
         private System.Windows.Forms.TextBox textBox_id;
         private System.Windows.Forms.Button button_submit;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textBox_password;
         private System.Windows.Forms.Label label_insertPassword;
         private System.Windows.Forms.Button button_change_password;
     }

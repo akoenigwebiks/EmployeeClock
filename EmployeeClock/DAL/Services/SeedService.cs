@@ -18,36 +18,51 @@ namespace EmployeeClock.DAL.Services
             SeedData();
         }
 
+        /// <summary>
+        /// Ensures the necessary database tables (Employees, Passwords, and Shifts) exist.
+        /// </summary>
+        /// <remarks>
+        /// This method checks for the existence of each table before attempting to create it.
+        /// If a table does not exist, it is created with the specified schema.
+        /// The Employees table includes columns for code, id, first_name, and last_name.
+        /// The Passwords table includes columns for code, employee_code, password, expiry_date, and has_access,
+        /// with a foreign key reference to the Employees table.
+        /// The Shifts table includes columns for code, employee_code, entry_time, and exit_time,
+        /// also with a foreign key reference to the Employees table.
+        /// </remarks>
         private void EnsureTables()
         {
             string[] sqlStatements = new string[]
             {
-                @"CREATE TABLE [dbo].[Employees] (
-                    [code]       INT          IDENTITY (1, 1) NOT NULL,
-                    [id]         VARCHAR (10) NULL,
-                    [first_name] VARCHAR (15) NULL,
-                    [last_name]  VARCHAR (15) NULL,
-                    PRIMARY KEY CLUSTERED ([code] ASC)
-                );",
+        @"IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'Employees' AND type = 'U')
+            CREATE TABLE [dbo].[Employees] (
+                [code]       INT          IDENTITY (1, 1) NOT NULL,
+                [id]         VARCHAR (10) NULL,
+                [first_name] VARCHAR (15) NULL,
+                [last_name]  VARCHAR (15) NULL,
+                PRIMARY KEY CLUSTERED ([code] ASC)
+            );",
 
-                @"CREATE TABLE [dbo].[Passwords] (
-                    [code]          INT          IDENTITY (1, 1) NOT NULL,
-                    [employee_code] INT          NULL,
-                    [password]      VARCHAR (12) NULL,
-                    [expiry_date]   DATE         NULL,
-                    [has_access]    BIT          NULL,
-                    PRIMARY KEY CLUSTERED ([code] ASC),
-                    FOREIGN KEY ([employee_code]) REFERENCES [dbo].[Employees] ([code])
-                );",
+        @"IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'Passwords' AND type = 'U')
+            CREATE TABLE [dbo].[Passwords] (
+                [code]          INT          IDENTITY (1, 1) NOT NULL,
+                [employee_code] INT          NULL,
+                [password]      VARCHAR (12) NULL,
+                [expiry_date]   DATE         NULL,
+                [has_access]    BIT          NULL,
+                PRIMARY KEY CLUSTERED ([code] ASC),
+                FOREIGN KEY ([employee_code]) REFERENCES [dbo].[Employees] ([code])
+            );",
 
-                @"CREATE TABLE [dbo].[Shifts] (
-                    [code]          INT      IDENTITY (1, 1) NOT NULL,
-                    [employee_code] INT      NULL,
-                    [entry_time]    DATETIME NULL,
-                    [exit_time]     DATETIME NULL,
-                    PRIMARY KEY CLUSTERED ([code] ASC),
-                    FOREIGN KEY ([employee_code]) REFERENCES [dbo].[Employees] ([code])
-                );"
+        @"IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'Shifts' AND type = 'U')
+            CREATE TABLE [dbo].[Shifts] (
+                [code]          INT      IDENTITY (1, 1) NOT NULL,
+                [employee_code] INT      NULL,
+                [entry_time]    DATETIME NULL,
+                [exit_time]     DATETIME NULL,
+                PRIMARY KEY CLUSTERED ([code] ASC),
+                FOREIGN KEY ([employee_code]) REFERENCES [dbo].[Employees] ([code])
+            );"
             };
 
             foreach (var sql in sqlStatements)
