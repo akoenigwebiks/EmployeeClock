@@ -162,6 +162,7 @@
     <Content Include="assets\sql\create\Employees.sql" />
     <Content Include="assets\sql\create\Passwords.sql" />
     <Content Include="assets\sql\create\Shifts.sql" />
+    <Content Include="assets\sql\JoinEmployeePassword.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
