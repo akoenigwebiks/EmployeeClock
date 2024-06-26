@@ -61,10 +61,10 @@
             this.button_submit.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.button_submit.Name = "button_submit";
             this.button_submit.Size = new System.Drawing.Size(248, 45);
-            this.button_submit.TabIndex = 2;
+            this.button_submit.TabIndex = 3;
             this.button_submit.Text = "כניסה";
             this.button_submit.UseVisualStyleBackColor = true;
-            this.button_submit.Click += new System.EventHandler(this.button_submit_Click);
+            this.button_submit.Click += new System.EventHandler(this.Button_submit_Click);
             // 
             // textBox_password
             // 
@@ -72,7 +72,7 @@
             this.textBox_password.Margin = new System.Windows.Forms.Padding(6);
             this.textBox_password.Name = "textBox_password";
             this.textBox_password.Size = new System.Drawing.Size(248, 38);
-            this.textBox_password.TabIndex = 4;
+            this.textBox_password.TabIndex = 2;
             // 
             // label_insertPassword
             // 
@@ -90,7 +90,7 @@
             this.button_change_password.Margin = new System.Windows.Forms.Padding(6);
             this.button_change_password.Name = "button_change_password";
             this.button_change_password.Size = new System.Drawing.Size(248, 45);
-            this.button_change_password.TabIndex = 5;
+            this.button_change_password.TabIndex = 4;
             this.button_change_password.Text = "החלפת סיסמא";
             this.button_change_password.UseVisualStyleBackColor = true;
             // 
