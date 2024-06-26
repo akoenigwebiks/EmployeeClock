@@ -78,16 +78,30 @@ namespace EmployeeClock.DAL.Services
                 string[] employeeIds = { "200024398", "200024367" };
                 foreach (var id in employeeIds)
                 {
+                    // Insert into Employees
                     dbManager.ExecuteNonQuery($"INSERT INTO Employees (id, first_name, last_name) VALUES ('{id}', 'John', 'Doe')");
 
                     // Retrieve the last inserted identity using ExecuteQuery and accessing the DataTable
                     DataTable result = dbManager.ExecuteQuery("SELECT MAX(code) FROM Employees;");
                     int employeeCode = Convert.ToInt32(result.Rows[0][0]); // Convert the result to int
 
+                    // Insert into Passwords
                     dbManager.ExecuteNonQuery($"INSERT INTO Passwords (employee_code, password, expiry_date, has_access) VALUES ({employeeCode}, '12345', '2099-12-31', 1)");
+
+                    // Insert 4 shifts for each employee
+                    for (int i = 1; i <= 4; i++)
+                    {
+                        // Assuming shifts are 8 hours long starting from 8:00 AM to 4:00 PM
+                        // Adjust the dates as necessary
+                        string entryTime = $"2023-06-0{i} 08:00:00";
+                        string exitTime = $"2023-06-0{i} 16:00:00";
+
+                        dbManager.ExecuteNonQuery($"INSERT INTO Shifts (employee_code, entry_time, exit_time) VALUES ({employeeCode}, '{entryTime}', '{exitTime}')");
+                    }
                 }
             }
         }
+
 
         private bool IsTableEmpty(string tableName)
         {

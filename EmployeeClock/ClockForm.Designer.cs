@@ -160,6 +160,7 @@
             this.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.RightToLeftLayout = true;
             this.Text = "שעון נוכחות - מסך ראשי";
+            this.Shown += new System.EventHandler(this.Load_initial_data);
             this.ResumeLayout(false);
             this.PerformLayout();
 

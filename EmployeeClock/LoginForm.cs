@@ -47,6 +47,7 @@ namespace EmployeeClock
             }
             bool isValidLogin = CheckLogin(username, password);
             MessageBox.Show(isValidLogin ? "התחברת בהצלחה" : "שם משתמש או סיסמא שגויים");
+            ApplicationState.Instance.username = username;
             _formHandler.ShowForm("ClockForm", true);
             this.Close();
         }

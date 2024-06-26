@@ -101,6 +101,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationState.cs" />
     <Compile Include="ClockForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -164,6 +165,7 @@
     <Content Include="assets\sql\create\Passwords.sql" />
     <Content Include="assets\sql\create\Shifts.sql" />
     <Content Include="assets\sql\JoinEmployeePassword.sql" />
+    <Content Include="assets\sql\JoinGetLastShiftForEmployee.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
