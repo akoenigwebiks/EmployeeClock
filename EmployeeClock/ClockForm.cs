@@ -1,4 +1,5 @@
 ﻿using EmployeeClock.DAL;
+using EmployeeClock.Utils;
 using System;
 using System.Data;
 using System.Globalization;
@@ -8,6 +9,23 @@ namespace EmployeeClock
 {
     struct ClockData
     {
+        public ClockData(string employeeName, string employeeId, string clockIn, string clockOut)
+        {
+            EmployeeId = employeeId;
+            EmployeeUserName = employeeName;
+            ClockInStr = clockIn;
+            ClockOutStr = clockOut;
+        }
+
+        public ClockData(DataRow shiftRow)
+        {
+            Func<string, string> GetVal = (key) => ConverterUtils.GetByKey(shiftRow, key);
+            EmployeeUserName = GetVal("id");
+            ClockInStr = GetVal("entry_time");
+            ClockOutStr = GetVal("exit_time");
+            EmployeeId = GetVal("employee_code");
+        }
+
         public string EmployeeUserName;
         public string EmployeeId;
         public string ClockInStr;
@@ -15,7 +33,7 @@ namespace EmployeeClock
     }
     public partial class ClockForm : Form
     {
-        DatabaseManager _databaseManager;
+        private readonly DatabaseManager _databaseManager;
         FormHandler _formHandler;
         string _employeeUsername;
         ClockData _currentshiftData;
@@ -41,9 +59,21 @@ namespace EmployeeClock
                                 ) ms ON s.employee_code = ms.employee_code AND s.entry_time = ms.MaxEntryTime
                                 WHERE e.id = {_employeeUsername};";
 
-            DataTable lastShift = _databaseManager.ExecuteQuery(query);
-            ClockData clockData = RowResultToClockData(lastShift);
-            return clockData;
+            /*
+                 ClockData RowResultToClockData(DataTable shiftRow) => new ClockData(shiftRow.Rows[0]);
+                 Func<DataTable,ClockData> RowResultToClockData = (shiftRow) => new ClockData(shiftRow.Rows[0]);
+            */
+            //return RowResultToClockData(_databaseManager.ExecuteQuery(query));
+
+            DataTable result = _databaseManager.ExecuteQuery(query);
+            DataRow shiftRow = result.Rows[0];
+            return new ClockData
+            {
+                EmployeeUserName = shiftRow["id"].ToString(),
+                ClockInStr = shiftRow["entry_time"].ToString(),
+                ClockOutStr = shiftRow["exit_time"].ToString(),
+                EmployeeId = shiftRow["employee_code"].ToString()
+            };
         }
 
         private void GoToLoginForm()
@@ -54,19 +84,6 @@ namespace EmployeeClock
         private void link_to_login_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             GoToLoginForm();
-        }
-
-        private ClockData RowResultToClockData(DataTable shiftRow)
-        {
-            ClockData clockData = new ClockData();
-            clockData.EmployeeUserName = shiftRow.Rows[0]["id"].ToString();
-
-            string clockInTimeStr = shiftRow.Rows[0]["entry_time"].ToString();
-            string clockOutTimeStr = shiftRow.Rows[0]["exit_time"].ToString();
-            clockData.ClockInStr = shiftRow.Rows[0]["entry_time"].ToString();
-            clockData.ClockOutStr = shiftRow.Rows[0]["exit_time"].ToString();
-            clockData.EmployeeId = shiftRow.Rows[0]["employee_code"].ToString();
-            return clockData;
         }
 
         private string StrToParsedDateStr(string dateStr)
