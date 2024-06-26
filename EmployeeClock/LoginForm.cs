@@ -44,7 +44,11 @@ namespace EmployeeClock
 
         private bool checkLogin(string username, string password)
         {
-            string query = $"SELECT * FROM Employees INNER JOIN Passwords ON Employees.code = Passwords.employee_code WHERE Employees.id = '{username}' AND passwords.password = '{password}'";
+            string query = $@"SELECT * FROM Employees 
+                                INNER JOIN Passwords 
+                                ON Employees.code = Passwords.employee_code 
+                                WHERE Employees.id = '{username}' 
+                                AND passwords.password = '{password}'";
 
             DataTable result = _databaseManager.ExecuteQuery(query);
             return result.Rows.Count != 0;
