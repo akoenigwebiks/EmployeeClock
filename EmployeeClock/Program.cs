@@ -36,7 +36,9 @@ namespace EmployeeClock
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new LoginForm(dbManager));
+            Form form = new LoginForm(dbManager);
+            form.Show();
+            Application.Run();
         }
     }
 }
