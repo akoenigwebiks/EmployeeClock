@@ -109,6 +109,7 @@
     </Compile>
     <Compile Include="DAL\DatabaseManager.cs" />
     <Compile Include="DAL\Services\SeedService.cs" />
+    <Compile Include="FormHandler.cs" />
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>

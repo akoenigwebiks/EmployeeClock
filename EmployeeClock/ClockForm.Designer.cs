@@ -36,6 +36,7 @@
             this.label_date_last_in = new System.Windows.Forms.Label();
             this.label_date_last_out = new System.Windows.Forms.Label();
             this.label_last_out = new System.Windows.Forms.Label();
+            this.link_to_login = new System.Windows.Forms.LinkLabel();
             this.SuspendLayout();
             // 
             // label_empId
@@ -45,7 +46,7 @@
             this.label_empId.Location = new System.Drawing.Point(209, 51);
             this.label_empId.Margin = new System.Windows.Forms.Padding(12, 0, 12, 0);
             this.label_empId.Name = "label_empId";
-            this.label_empId.Size = new System.Drawing.Size(149, 31);
+            this.label_empId.Size = new System.Drawing.Size(188, 39);
             this.label_empId.TabIndex = 9;
             this.label_empId.Text = "200024396";
             // 
@@ -77,7 +78,7 @@
             this.label_hello.Location = new System.Drawing.Point(45, 51);
             this.label_hello.Margin = new System.Windows.Forms.Padding(12, 0, 12, 0);
             this.label_hello.Name = "label_hello";
-            this.label_hello.Size = new System.Drawing.Size(133, 31);
+            this.label_hello.Size = new System.Drawing.Size(166, 39);
             this.label_hello.TabIndex = 10;
             this.label_hello.Text = "זהות עובד:";
             // 
@@ -88,7 +89,7 @@
             this.label_last_in.Location = new System.Drawing.Point(114, 124);
             this.label_last_in.Margin = new System.Windows.Forms.Padding(12, 0, 12, 0);
             this.label_last_in.Name = "label_last_in";
-            this.label_last_in.Size = new System.Drawing.Size(181, 25);
+            this.label_last_in.Size = new System.Drawing.Size(225, 31);
             this.label_last_in.TabIndex = 12;
             this.label_last_in.Text = "תאריך כניסה אחרון";
             // 
@@ -100,7 +101,7 @@
             this.label_date_last_in.Location = new System.Drawing.Point(150, 162);
             this.label_date_last_in.Margin = new System.Windows.Forms.Padding(12, 0, 12, 0);
             this.label_date_last_in.Name = "label_date_last_in";
-            this.label_date_last_in.Size = new System.Drawing.Size(120, 25);
+            this.label_date_last_in.Size = new System.Drawing.Size(150, 31);
             this.label_date_last_in.TabIndex = 14;
             this.label_date_last_in.Text = "01/01/1999";
             // 
@@ -112,7 +113,7 @@
             this.label_date_last_out.Location = new System.Drawing.Point(150, 242);
             this.label_date_last_out.Margin = new System.Windows.Forms.Padding(12, 0, 12, 0);
             this.label_date_last_out.Name = "label_date_last_out";
-            this.label_date_last_out.Size = new System.Drawing.Size(120, 25);
+            this.label_date_last_out.Size = new System.Drawing.Size(150, 31);
             this.label_date_last_out.TabIndex = 16;
             this.label_date_last_out.Text = "01/01/1999";
             // 
@@ -123,15 +124,28 @@
             this.label_last_out.Location = new System.Drawing.Point(114, 204);
             this.label_last_out.Margin = new System.Windows.Forms.Padding(12, 0, 12, 0);
             this.label_last_out.Name = "label_last_out";
-            this.label_last_out.Size = new System.Drawing.Size(182, 25);
+            this.label_last_out.Size = new System.Drawing.Size(226, 31);
             this.label_last_out.TabIndex = 15;
             this.label_last_out.Text = "תאריך יציאה אחרון";
             // 
+            // link_to_login
+            // 
+            this.link_to_login.AutoSize = true;
+            this.link_to_login.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.link_to_login.Location = new System.Drawing.Point(193, 290);
+            this.link_to_login.Name = "link_to_login";
+            this.link_to_login.Size = new System.Drawing.Size(67, 29);
+            this.link_to_login.TabIndex = 17;
+            this.link_to_login.TabStop = true;
+            this.link_to_login.Text = "ביטול";
+            this.link_to_login.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.link_to_login_LinkClicked);
+            // 
             // ClockForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(20F, 39F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(437, 454);
+            this.Controls.Add(this.link_to_login);
             this.Controls.Add(this.label_date_last_out);
             this.Controls.Add(this.label_last_out);
             this.Controls.Add(this.label_date_last_in);
@@ -141,7 +155,7 @@
             this.Controls.Add(this.button_StartWork);
             this.Controls.Add(this.button_endWork);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "ClockForm";
             this.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.RightToLeftLayout = true;
@@ -161,5 +175,6 @@
         private System.Windows.Forms.Label label_date_last_in;
         private System.Windows.Forms.Label label_date_last_out;
         private System.Windows.Forms.Label label_last_out;
+        private System.Windows.Forms.LinkLabel link_to_login;
     }
 }

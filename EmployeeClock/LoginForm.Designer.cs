@@ -42,23 +42,23 @@
             this.label_insertId.Location = new System.Drawing.Point(152, 33);
             this.label_insertId.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label_insertId.Name = "label_insertId";
-            this.label_insertId.Size = new System.Drawing.Size(142, 31);
+            this.label_insertId.Size = new System.Drawing.Size(178, 39);
             this.label_insertId.TabIndex = 0;
             this.label_insertId.Text = "תעודת זהות";
             // 
             // textBox_id
             // 
             this.textBox_id.Location = new System.Drawing.Point(98, 70);
-            this.textBox_id.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.textBox_id.Margin = new System.Windows.Forms.Padding(6);
             this.textBox_id.Name = "textBox_id";
-            this.textBox_id.Size = new System.Drawing.Size(248, 38);
+            this.textBox_id.Size = new System.Drawing.Size(248, 46);
             this.textBox_id.TabIndex = 1;
             this.textBox_id.TextChanged += new System.EventHandler(this.textBox_id_TextChanged);
             // 
             // button_submit
             // 
             this.button_submit.Location = new System.Drawing.Point(98, 303);
-            this.button_submit.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.button_submit.Margin = new System.Windows.Forms.Padding(6);
             this.button_submit.Name = "button_submit";
             this.button_submit.Size = new System.Drawing.Size(248, 45);
             this.button_submit.TabIndex = 3;
@@ -71,7 +71,7 @@
             this.textBox_password.Location = new System.Drawing.Point(98, 167);
             this.textBox_password.Margin = new System.Windows.Forms.Padding(6);
             this.textBox_password.Name = "textBox_password";
-            this.textBox_password.Size = new System.Drawing.Size(248, 38);
+            this.textBox_password.Size = new System.Drawing.Size(248, 46);
             this.textBox_password.TabIndex = 2;
             // 
             // label_insertPassword
@@ -80,7 +80,7 @@
             this.label_insertPassword.Location = new System.Drawing.Point(177, 130);
             this.label_insertPassword.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label_insertPassword.Name = "label_insertPassword";
-            this.label_insertPassword.Size = new System.Drawing.Size(87, 31);
+            this.label_insertPassword.Size = new System.Drawing.Size(108, 39);
             this.label_insertPassword.TabIndex = 3;
             this.label_insertPassword.Text = "סיסמא";
             // 
@@ -93,10 +93,11 @@
             this.button_change_password.TabIndex = 4;
             this.button_change_password.Text = "החלפת סיסמא";
             this.button_change_password.UseVisualStyleBackColor = true;
+            this.button_change_password.Click += new System.EventHandler(this.Button_change_password_Click);
             // 
             // LoginForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(20F, 39F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(437, 454);
             this.Controls.Add(this.button_change_password);
@@ -106,7 +107,7 @@
             this.Controls.Add(this.textBox_id);
             this.Controls.Add(this.label_insertId);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "LoginForm";
             this.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.RightToLeftLayout = true;
