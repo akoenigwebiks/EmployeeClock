@@ -8,13 +8,13 @@ namespace EmployeeClock
     public partial class LoginForm : Form
     {
         DatabaseManager _databaseManager;
-        ClockForm _clockForm;
+        FormHandler _formHandler;
 
-        public LoginForm(DatabaseManager databaseManager)
+        public LoginForm(DatabaseManager databaseManager, FormHandler formHandler)
         {
             _databaseManager = databaseManager;
             InitializeComponent();
-            _clockForm = new ClockForm(); // Initialize once and reuse
+            _formHandler = formHandler;
         }
 
         private void textBox_id_TextChanged(object sender, EventArgs e)
@@ -47,7 +47,7 @@ namespace EmployeeClock
             }
             bool isValidLogin = CheckLogin(username, password);
             MessageBox.Show(isValidLogin ? "התחברת בהצלחה" : "שם משתמש או סיסמא שגויים");
-            _clockForm.Show();
+            _formHandler.ShowForm("ClockForm", true);
             this.Close();
         }
 
@@ -61,6 +61,11 @@ namespace EmployeeClock
 
             DataTable result = _databaseManager.ExecuteQuery(query);
             return result.Rows.Count != 0;
+        }
+
+        private void Button_change_password_Click(object sender, EventArgs e)
+        {
+            _formHandler.ShowForm("PasswordChangeForm", true);
         }
     }
 }

@@ -34,10 +34,11 @@ namespace EmployeeClock
             // Ensure the database is set up and seeded
             seedService.EnsureDatabaseSetup();
 
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Form form = new LoginForm(dbManager);
-            form.Show();
+            FormHandler formHandler = new FormHandler(dbManager);
+            formHandler.ShowForm("LoginForm", false);
             Application.Run();
         }
     }
