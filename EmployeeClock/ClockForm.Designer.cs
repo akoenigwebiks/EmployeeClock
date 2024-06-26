@@ -60,6 +60,7 @@
             this.button_StartWork.TabIndex = 8;
             this.button_StartWork.Text = "כניסה";
             this.button_StartWork.UseVisualStyleBackColor = false;
+            this.button_StartWork.Click += new System.EventHandler(this.Button_StartWork_Click);
             // 
             // button_endWork
             // 
@@ -71,6 +72,7 @@
             this.button_endWork.TabIndex = 7;
             this.button_endWork.Text = "יציאה";
             this.button_endWork.UseVisualStyleBackColor = false;
+            this.button_endWork.Click += new System.EventHandler(this.Button_endWork_Click);
             // 
             // label_hello
             // 
@@ -98,24 +100,28 @@
             this.label_date_last_in.AutoSize = true;
             this.label_date_last_in.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_date_last_in.ForeColor = System.Drawing.Color.DarkSeaGreen;
-            this.label_date_last_in.Location = new System.Drawing.Point(150, 162);
+            this.label_date_last_in.Location = new System.Drawing.Point(109, 164);
             this.label_date_last_in.Margin = new System.Windows.Forms.Padding(12, 0, 12, 0);
             this.label_date_last_in.Name = "label_date_last_in";
-            this.label_date_last_in.Size = new System.Drawing.Size(150, 31);
+            this.label_date_last_in.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.label_date_last_in.Size = new System.Drawing.Size(120, 31);
             this.label_date_last_in.TabIndex = 14;
-            this.label_date_last_in.Text = "01/01/1999";
+            this.label_date_last_in.Text = "01/01/01";
+            this.label_date_last_in.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label_date_last_out
             // 
             this.label_date_last_out.AutoSize = true;
             this.label_date_last_out.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_date_last_out.ForeColor = System.Drawing.Color.Tomato;
-            this.label_date_last_out.Location = new System.Drawing.Point(150, 242);
+            this.label_date_last_out.Location = new System.Drawing.Point(109, 245);
             this.label_date_last_out.Margin = new System.Windows.Forms.Padding(12, 0, 12, 0);
             this.label_date_last_out.Name = "label_date_last_out";
-            this.label_date_last_out.Size = new System.Drawing.Size(150, 31);
+            this.label_date_last_out.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.label_date_last_out.Size = new System.Drawing.Size(120, 31);
             this.label_date_last_out.TabIndex = 16;
-            this.label_date_last_out.Text = "01/01/1999";
+            this.label_date_last_out.Text = "01/01/01";
+            this.label_date_last_out.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label_last_out
             // 

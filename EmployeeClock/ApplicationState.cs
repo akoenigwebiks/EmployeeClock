@@ -8,6 +8,7 @@ namespace EmployeeClock
 
         // Example property
         public string username { get; set; } = string.Empty;
+        public string userId { get; set; }
 
         // Private constructor ensures only this class can instantiate itself
         private ApplicationState() { }

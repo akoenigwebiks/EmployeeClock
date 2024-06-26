@@ -45,14 +45,18 @@ namespace EmployeeClock
                 MessageBox.Show("נא למלא את כל השדות");
                 return;
             }
-            bool isValidLogin = CheckLogin(username, password);
-            MessageBox.Show(isValidLogin ? "התחברת בהצלחה" : "שם משתמש או סיסמא שגויים");
+            DataTable loggedInUser = CheckLogin(username, password);
+
+            string db_id = loggedInUser.Rows[0]["code"].ToString();
+
+            MessageBox.Show(db_id != string.Empty ? "התחברת בהצלחה" : "שם משתמש או סיסמא שגויים");
             ApplicationState.Instance.username = username;
+            ApplicationState.Instance.userId = db_id;
             _formHandler.ShowForm("ClockForm", true);
             this.Close();
         }
 
-        private bool CheckLogin(string username, string password)
+        private DataTable CheckLogin(string username, string password)
         {
             string query = $@"SELECT * FROM Employees 
                                 INNER JOIN Passwords 
@@ -61,7 +65,9 @@ namespace EmployeeClock
                                 AND passwords.password = '{password}'";
 
             DataTable result = _databaseManager.ExecuteQuery(query);
-            return result.Rows.Count != 0;
+            return result;
+            //DataTable result = _databaseManager.ExecuteQuery(query);
+            //return result.Rows.Count != 0;
         }
 
         private void Button_change_password_Click(object sender, EventArgs e)

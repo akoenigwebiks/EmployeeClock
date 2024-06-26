@@ -1,27 +1,24 @@
 ﻿using EmployeeClock.DAL;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Globalization;
 using System.Windows.Forms;
 
 namespace EmployeeClock
 {
     struct ClockData
     {
-        public string EmployeeName;
-        public string ClockInTime;
-        public string ClockOutTime;
+        public string EmployeeUserName;
+        public string EmployeeId;
+        public string ClockInStr;
+        public string ClockOutStr;
     }
     public partial class ClockForm : Form
     {
         DatabaseManager _databaseManager;
         FormHandler _formHandler;
         string _employeeUsername;
+        ClockData _currentshiftData;
 
         public ClockForm(DatabaseManager databaseManager, FormHandler formHandler)
         {
@@ -34,7 +31,7 @@ namespace EmployeeClock
         private ClockData? GetInitialData()
         {
 
-            string query= $@"SELECT e.id, s.*
+            string query = $@"SELECT e.id, s.*
                                 FROM Employees e
                                 INNER JOIN Shifts s ON e.code = s.employee_code
                                 INNER JOIN (
@@ -45,13 +42,48 @@ namespace EmployeeClock
                                 WHERE e.id = {_employeeUsername};";
 
             DataTable lastShift = _databaseManager.ExecuteQuery(query);
-
-            return new ClockData();
+            ClockData clockData = RowResultToClockData(lastShift);
+            return clockData;
         }
 
-        private void link_to_login_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void GoToLoginForm()
         {
             _formHandler.ShowForm("LoginForm", true);
+
+        }
+        private void link_to_login_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            GoToLoginForm();
+        }
+
+        private ClockData RowResultToClockData(DataTable shiftRow)
+        {
+            ClockData clockData = new ClockData();
+            clockData.EmployeeUserName = shiftRow.Rows[0]["id"].ToString();
+
+            string clockInTimeStr = shiftRow.Rows[0]["entry_time"].ToString();
+            string clockOutTimeStr = shiftRow.Rows[0]["exit_time"].ToString();
+            clockData.ClockInStr = shiftRow.Rows[0]["entry_time"].ToString();
+            clockData.ClockOutStr = shiftRow.Rows[0]["exit_time"].ToString();
+            clockData.EmployeeId = shiftRow.Rows[0]["employee_code"].ToString();
+            return clockData;
+        }
+
+        private string StrToParsedDateStr(string dateStr)
+        {
+            if (dateStr == string.Empty)
+            {
+                return string.Empty;
+            }
+            try
+            {
+                CultureInfo culture = CultureInfo.CurrentCulture;
+                return DateTime.Parse(dateStr).ToString("g", CultureInfo.CurrentCulture);
+            }
+            catch (Exception)
+            {
+                return string.Empty;
+            }
         }
 
         private void Load_initial_data(object sender, EventArgs e)
@@ -64,8 +96,45 @@ namespace EmployeeClock
                 return;
             }
 
-            ClockData data = GetInitialData().Value;
+            _currentshiftData = GetInitialData().Value;
 
+            // Convert DateTime to string with culture-specific format
+            string clockInStr = StrToParsedDateStr(_currentshiftData.ClockInStr);
+            string clockOutStr = StrToParsedDateStr(_currentshiftData.ClockOutStr);
+
+            label_date_last_in.Text = clockInStr;
+            label_date_last_out.Text = clockOutStr;
+            label_empId.Text = _currentshiftData.EmployeeUserName;
+        }
+
+        private void Button_StartWork_Click(object sender, EventArgs e)
+        {
+            if (_currentshiftData.ClockOutStr.ToString() == string.Empty)
+            {
+                MessageBox.Show("אירעה שגיאה - אין רישום יציאה על משמרת אחרונה");
+                return;
+            }
+            string query = $@"INSERT INTO Shifts (employee_code, entry_time) 
+                                VALUES ({_currentshiftData.EmployeeId}, '{DateTime.Now}');";
+            DataTable newShift = _databaseManager.ExecuteQuery(query);
+            MessageBox.Show("המשמרת התחילה בהצלחה");
+            GoToLoginForm();
+        }
+
+        private void Button_endWork_Click(object sender, EventArgs e)
+        {
+            if (_currentshiftData.ClockOutStr.ToString() != string.Empty)
+            {
+                MessageBox.Show("אירעה שגיאה - קיים כבר רישום יציאה משמרת נוכחית");
+                return;
+            }
+
+            string query = $@"UPDATE Shifts
+                                SET exit_time = '{DateTime.Now}'
+                                WHERE employee_code = {_employeeUsername} AND entry_time = '{_currentshiftData.ClockInStr}';";
+            DataTable endShift = _databaseManager.ExecuteQuery(query);
+            MessageBox.Show("המשמרת הסתיימה בהצלחה");
+            GoToLoginForm();
         }
     }
 }
