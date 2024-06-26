@@ -32,14 +32,7 @@ namespace EmployeeClock
                 return;
             }
             bool isValidLogin = checkLogin(username, password);
-            if (isValidLogin)
-            {
-                MessageBox.Show("התחברת בהצלחה");
-            }
-            else
-            {
-                MessageBox.Show("שם משתמש או סיסמא שגויים");
-            }
+            MessageBox.Show(isValidLogin ? "התחברת בהצלחה" : "שם משתמש או סיסמא שגויים");
         }
 
         private bool checkLogin(string username, string password)
