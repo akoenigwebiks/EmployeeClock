@@ -7,7 +7,7 @@ namespace EmployeeClock
 {
     public partial class LoginForm : Form
     {
-        DatabaseManager _databaseManager;
+        private readonly DatabaseManager _databaseManager;
         FormHandler _formHandler;
 
         public LoginForm(DatabaseManager databaseManager, FormHandler formHandler)
